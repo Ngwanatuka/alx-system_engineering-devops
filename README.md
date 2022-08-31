@@ -1,2 +1,1 @@
-# alx-system_engineering-devops
-prints out an absolute path
+prints the absolute path of the current working directory
