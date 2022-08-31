@@ -1,2 +1,2 @@
 #!/bin/bash
-rsync -a html/ 0x00-shell_basics
+cp -a ./0x00-shell_basics/. ./html
