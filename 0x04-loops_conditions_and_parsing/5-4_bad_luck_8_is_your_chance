@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Initialize a counter variable with the value of 1
+count=1
+
+# Start a while loop that will run as long as the value of 'count' is less than or equal to 10
+while [ $count -le 10 ]
+do
+  # Check if the value of 'count' is equal to 4
+  if [ $count -eq 4 ]; then
+    # If the condition is true, display "bad luck"
+    echo "bad luck"
+  # Check if the value of 'count' is equal to 8
+  elif [ $count -eq 8 ]; then
+    # If the condition is true, display "good luck"
+    echo "good luck"
+  else
+    # If the conditions above are not true, display "Best School"
+    echo "Best School"
+  fi
+  # Increment the value of 'count' by 1
+  count=$((count+1))
+done
