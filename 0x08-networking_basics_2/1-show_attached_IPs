@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Get the list of all network interfaces
+interfaces=$(ifconfig | awk -F':' '/^[a-z]/ && !/^lo/ {print $1}')
+
+# Loop through each network interface
+for interface in $interfaces; do
+  # Get the IPv4 address of the interface
+  ip=$(ifconfig $interface | awk '/inet / {print $2}')
+
+  # Print the interface and its IPv4 address
+  echo "$interface: $ip"
+done
+
