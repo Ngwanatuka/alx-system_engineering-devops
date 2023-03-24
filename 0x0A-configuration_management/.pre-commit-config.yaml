@@ -1,0 +1,5 @@
+repos:
+- repo: https://github.com/voxpupuli/puppet-lint
+  rev: <VERSION> # Replace with the version of puppet-lint you want to use
+  hooks:
+  - id: puppet-lint
