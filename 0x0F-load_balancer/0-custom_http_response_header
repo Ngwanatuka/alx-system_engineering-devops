@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Update package lists and install Nginx
+sudo apt-get update
+sudo apt-get install nginx -y
+
+# Create a simple "Hello World" page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Configure Nginx to redirect to a YouTube video
+sudo sed -i '/server_name _;/a \	location /redirect_me {\n		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n	}' /etc/nginx/sites-available/default
+
+# Create a custom 404 error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+
+# Configure Nginx to use the custom 404 error page
+sudo sed -i '/server_name _;/a \        error_page 404 /custom_404.html;\n        location = /custom_404.html {\n                internal;\n        }' /etc/nginx/sites-available/default
+
+# Create a variable to store the hostname of the server
+HOSTNAME=$(hostname)
+
+# Add custom header configuration to Nginx
+sudo sed -i "/^http {/a \    add_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
+
+# Restart Nginx to apply the changes
+sudo service nginx restart
