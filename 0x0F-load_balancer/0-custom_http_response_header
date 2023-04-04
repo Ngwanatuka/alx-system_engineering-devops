@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Sets up nginx server with default configurations and custom response header
+# This script sets up nginx server with default configurations and custom response header
 sudo apt update
 sudo apt install -y nginx
 
@@ -10,4 +10,5 @@ echo "Ceci n'est pas une page" | sudo tee /var/www/html/error404.html
 sudo sed -i '/server_name _;/a\\terror_page 404 /error404.html;' /etc/nginx/sites-available/default
 sudo sed -i '0,/try_files $uri $uri\/ =404;/!b;//i\\t\tadd_header X-Served-By $HOSTNAME;' /etc/nginx/sites-available/default
 
+# restart the nginx service
 sudo service nginx restart
