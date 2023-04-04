@@ -5,8 +5,8 @@ sudo apt-get update
 sudo apt-get install haproxy -y
 
 # Define the hostnames of web-01 and web-02 servers
-HOSTNAME1="54.144.221.234"
-HOSTNAME2="100.26.154.245"
+HOSTNAME1=54.173.209.77
+HOSTNAME2=54.196.33.13
 
 # Configure HAProxy
 sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOF 
