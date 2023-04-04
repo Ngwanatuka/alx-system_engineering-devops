@@ -14,10 +14,10 @@ frontend http-in
     bind *:80
     default_backend servers
 
-backend servers
-    balance roundrobin
-    server web-01 ${HOSTNAME1}-web-01:80 check
-    server web-02 ${HOSTNAME2}-web-02:80 check
+backend myservers
+    mode http
+    server 105225-web-01 $HOSTNAME1
+    server 105225-web-02 $HOSTNAME2
 EOF
 
 # Restart HAProxy

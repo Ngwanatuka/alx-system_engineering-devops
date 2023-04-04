@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # a script to log in a server 
-ssh ubuntu@54.173.209.77 -i ~/.ssh/school
+ssh ubuntu@mosesmolepo.tech -i ~/.ssh/school
