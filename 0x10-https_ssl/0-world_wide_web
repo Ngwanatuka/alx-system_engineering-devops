@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # This script retrieves DNS information for a given domain and subdomain,
 # and displays it in the required format.
 
