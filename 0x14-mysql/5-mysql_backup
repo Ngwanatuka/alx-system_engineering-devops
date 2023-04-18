@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-
+# a script that creates a backup file for a database
 # Get the current date in the format we want
-DATE=`date +%d-%m-%Y`
+DATE=$(date +%d-%m-%Y)
 
 # The name of the archive we'll create
 ARCHIVE_NAME="$DATE.tar.gz"
@@ -10,15 +10,12 @@ ARCHIVE_NAME="$DATE.tar.gz"
 DUMP_NAME="backup.sql"
 
 # The password is the first argument
-PASSWORD=$1
+PASSWORD="$1"
 
 # Dump all databases to the backup file
-mysqldump -u root -p"$PASSWORD" --all-databases > $DUMP_NAME
+mysqldump -u root -p"$PASSWORD" --all-databases > "$DUMP_NAME"
 
 # Create the compressed archive
-tar -czvf $ARCHIVE_NAME $DUMP_NAME
-
-# Remove the uncompressed dump file
-rm $DUMP_NAME
+tar -czvf "$ARCHIVE_NAME" "$DUMP_NAME"
 
 echo "MySQL backup completed and saved as $ARCHIVE_NAME"
