@@ -1,2 +1,3 @@
+#!/usr/bin/env bash
 # This script accepts one argument and runs whoami and the user passes an argument
 sudo -u $1 whoami
