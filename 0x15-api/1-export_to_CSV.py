@@ -11,14 +11,14 @@ if __name__ == "__main__":
     usr_json = requests.get('https://jsonplaceholder.typicode.com/users/' +
                             emp_id).json()
     emp_name = usr_json.get('username')
-    todos = requests.get('https://jsonplaceholder.typicode.com/users/' +
-                         emp_id + '/todos').json()
-
-    csv_file = emp_id + '.csv'
-
-    with open(csv_file, 'w') as csv:
-        for todo in todos:
-            csv.write('"{}","{}","{}","{}"\n'.format(todo.get('userId'),
-                                                     emp_name,
-                                                     todo.get("completed"),
-                                                     todo.get("title")))
+    todos = requests.get('https://jsonplaceholder.typicode.com/todos').json()
+    emp_tasks = []
+    for todo in todos:
+        if todo.get("userId") == int(emp_id):
+            task = [emp_id, emp_name, todo.get("completed"), todo.get("title")]
+            emp_tasks.append(task)
+    filename = emp_id + ".csv"
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+        writer.writerows(emp_tasks)
