@@ -40,7 +40,8 @@ def main():
     completed_titles = [t["title"] for t in completed_tasks]
 
     # Print the employee's progress report
-    print(f"Employee {emp_name} is done with tasks({num_completed}/{total_tasks}):")
+    print(f"Employee {emp_name} is done\
+            with tasks({num_completed}/{total_tasks}):")
     for title in completed_titles:
         print(f"\t {title}")
 
