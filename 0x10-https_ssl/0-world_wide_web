@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# This script retrieves DNS information for a given domain and subdomain,
+# and displays it in the required format.
+
+# The get_dns_inf function retrieves the DNS information for a specified subdomain and domain,
+# and formats it for display in the required output format.
+get_dns_inf() {
+    local subdomain=$2
+    local domain=$1
+    local dns_info
+    dns_info=$(dig "${subdomain}.${domain}" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
+    echo "${subdomain} ${dns_info}" | awk '{printf "The subdomain %s is a %s record and points to %s\n", $1, $2, $3}'
+}
+
+# If only one argument is provided, display information for all subdomains specified in the requirements.
+# If two arguments are provided, display information for the specified subdomain only.
+if [ "$#" == 1 ]; then
+    get_dns_inf "$1" "www"
+    get_dns_inf "$1" "lb-01"
+    get_dns_inf "$1" "web-01"
+    get_dns_inf "$1" "web-02"
+elif [ "$#" == 2 ]; then
+    get_dns_inf "$1" "$2"
+fi
