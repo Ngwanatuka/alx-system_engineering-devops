@@ -18,6 +18,11 @@ backend app
     server web-02 54.175.223.207:80 check
 EOF
 
-# Enable and start HAproxy service
-sudo systemctl enable haproxy
-sudo systemctl start haproxy
+# start the loadbalancer
+sudo /etc/init.d/haproxy start
+
+# set HAProxy to start at boot
+sudo update-rc.d haproxy defaults
+
+# reload HAProxy configuration
+sudo /etc/init.d/haproxy reload
