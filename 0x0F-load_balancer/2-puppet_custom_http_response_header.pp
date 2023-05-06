@@ -1,3 +1,4 @@
+# Puppet class to configure Nginx with a custom response header
 class nginx_custom_header {
   package { 'nginx':
     ensure => installed,
