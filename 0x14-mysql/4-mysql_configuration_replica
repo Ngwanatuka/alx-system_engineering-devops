@@ -1,6 +1,0 @@
-[mysqld]
-log-error       = /var/log/mysql/error.log
-server-id       = 2
-log_bin         = /var/log/mysql/mysql-bin.log
-relay-log       = /var/log/mysql/mysql-relay-bin.log
-log_slave_updates       = 1
