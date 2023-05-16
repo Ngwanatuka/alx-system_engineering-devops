@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# a script that runs nginx as nginx user then lsten on all active IPs on port 8080
+
+sudo service nginx stop
+
+sudo chown -R nginx:nginx /var/log/nginx /var/lib/nginx /etc/nginx
+
+sudo sed -i 's/#user www-data;/user nginx;/' /etc/nginx/nginx.conf
+
+sudo sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
+sudo sed -i 's/listen \[::\]:80 default_server ipv6only=on;/listen \[::\]:8080 default_server ipv6only=on;/' /etc/nginx/sites-available/default
+sudo service nginx start
