@@ -7,31 +7,24 @@ articles for a given subreddit
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None, max_iterations=10):
+def recurse(subreddit, hot_list=[], after=None):
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {'User-Agent': 'Customer User Agent'}
-    params = {'limit': 100}  # Maximum number of posts per request
-
+    headers = {"User-Agent": "Custom User Agent"}
+    params = {"limit": 100}
     if after:
-        params['after'] = after
+        params["after"] = after
 
-    try:
-        response = requests.get(
-                url, headers=headers, params=params, allow_redirects=False)
-        response.raise_for_status()
+    response = requests.get(
+            url, headers=headers, params=params, allow_redirects=False)
+
+    if response.status_code == 200:
         data = response.json()
-        if 'data' in data and 'children' in data['data']:
-            posts = data['data']['children']
-            for post in posts:
-                if 'data' in post and 'title' in post['data']:
-                    hot_list.append(post['data']['title'])
-        if 'data' in data and 'after' in data['data']:
-            after = data['data']['after']
-            if len(hot_list) < max_iterations * 100:
-                return recurse(subreddit, hot_list, after, max_iterations)
-            else:
-                return hot_list
-        else:
-            return hot_list
-    except (requests.exceptions.RequestException, ValueError, KeyError):
-        return None
+        posts = data["data"]["children"]
+
+        if posts:
+            hot_list.extend([post["data"]["title"] for post in posts])
+            after = data["data"]["after"]
+            if after:
+                return recurse(subreddit, hot_list, after)
+
+    return hot_list if hot_list else None
