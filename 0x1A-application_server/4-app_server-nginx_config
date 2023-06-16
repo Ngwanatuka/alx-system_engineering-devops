@@ -1,0 +1,5 @@
+#change reverse proxy to api route
+        location /api/ {
+                proxy_pass http://127.0.0.1:5002;
+        }
+}
