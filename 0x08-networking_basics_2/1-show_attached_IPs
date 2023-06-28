@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#a script that displays all active IPv4 IPs on the machine it's executed on
 
 # Get the list of all network interfaces
 interfaces=$(ifconfig | awk -F':' '/^[a-z]/ && !/^lo/ {print $1}')
